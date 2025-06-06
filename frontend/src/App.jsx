@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 
 function App() {
 
+
   const [loading, setLoading] = useState(false) 
   const [lookupNic, setLookupNic] = useState('');
   const [studentInfo, setStudentInfo] = useState(null);
@@ -20,7 +21,7 @@ function App() {
 
   })
 const fetchUsers = async () => {
-    const response = await axios.get('http://localhost:5000/all-users')
+    const response = await axios.get(`/api/all-users`)
     const result = response.data
     setData(result.users)
     
@@ -60,7 +61,7 @@ const fetchUsers = async () => {
     formDataToSend.append('image', formData.image)
 
     try {
-      const response = await axios.post('http://localhost:5000/api/user/create', formDataToSend, {
+      const response = await axios.post('/api/user/create', formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -88,7 +89,7 @@ const fetchUsers = async () => {
 
   const handleGenerate = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/idcard/${lookupNic}`)
+      const res = await axios.get(`api/idcard/${lookupNic}`)
       setStudentInfo(res.data)
           setMessage('')
     } catch (error) {

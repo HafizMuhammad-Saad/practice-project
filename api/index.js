@@ -7,6 +7,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
+const serverless = require("serverless-http");
 
 app.use(cors());
 app.use(express.json());
@@ -123,7 +124,12 @@ app.get('/all-users', async (req, res) => {
     res.send({users: allUsers});
 })
 
-app.listen(process.env.PORT, () => {
-    console.log(`srver is running on port ${process.env.PORT}`);
 
-})
+
+module.exports = app;
+module.exports.handler = serverless(app);
+
+// app.listen(process.env.PORT, () => {
+//     console.log(`srver is running on port ${process.env.PORT}`);
+
+// })
