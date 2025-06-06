@@ -72,7 +72,7 @@ const uploadImageInCloudinary = (buffer, fileName) => {
     })
 };
 
-app.get('/idcard/:nic', async (req,res) => {
+app.get('/api/idcard/:nic', async (req,res) => {
     const nic = req.params.nic
     const all = await readDataFromFile()
     
@@ -119,11 +119,10 @@ app.post("/api/user/create", upload.single("image"), async (req, res) => {
     return res.send({message: "User Created Successfully", success: true, user: newUser});
 
 })
-app.get('/all-users', async (req, res) => {
+app.get('/api/all-users', async (req, res) => {
     const allUsers = await readDataFromFile();
     res.send({users: allUsers});
 })
-
 
 
 module.exports = app;
