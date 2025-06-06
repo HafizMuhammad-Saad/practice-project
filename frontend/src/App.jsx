@@ -130,36 +130,55 @@ const fetchUsers = async () => {
 
     {/* {
       showIdCard ?? ( */}
-        <div className="">
-          <h3>generate your ID card</h3>
-          <input type="text" placeholder='enter nic' value={lookupNic} onChange={(e) => setLookupNic(e.target.value)} />
-          <button onClick={handleGenerate}>Get ID card</button>
-        </div>
+        <div className="flex justify-center items-center my-8">
+  <div className="card w-96 bg-gradient-to-br from-blue-100 to-blue-300 shadow-xl p-6">
+    <h3 className="text-2xl font-bold text-center mb-4 text-blue-700">Generate Your ID Card</h3>
+    <div className="flex flex-col gap-4">
+      <input
+        type="text"
+        placeholder="Enter CNIC Number"
+        value={lookupNic}
+        onChange={(e) => setLookupNic(e.target.value)}
+        className="input input-bordered input-info w-full text-lg"
+      />
+      <button
+        onClick={handleGenerate}
+        className="btn btn-info btn-block text-lg font-semibold shadow"
+      >
+        Get ID Card
+      </button>
+    </div>
+  </div>
+</div>
      {/* )
     }  */}
  {
   studentInfo && (
-
-    // data?.map((user) => (
-  
-      <div ref={idCardRef} className="card bg-base-100 w-96 shadow-sm">
-    <figure>
-      <img
-        src={studentInfo.image}
-        alt="Shoes" />
-    </figure>
-    <div className="card-body">
-      <h2 className="card-title">{studentInfo.name}</h2>
-      <h2 className="card-title">{studentInfo.id}</h2>
-      <p>{studentInfo.email}</p>
-      <div className="card-actions justify-end">
-        <button className="btn btn-primary">{studentInfo.nic}</button>
+    <div
+      ref={idCardRef}
+      className="flex justify-center items-center my-8"
+    >
+      <div className="relative w-96 bg-white rounded-2xl shadow-2xl border-4 border-blue-200 overflow-hidden">
+        <div className="bg-gradient-to-r from-blue-400 to-blue-200 h-32 w-full"></div>
+        <div className="flex flex-col items-center -mt-16 pb-6">
+          <img
+            src={studentInfo.image}
+            alt={studentInfo.name}
+            className="w-28 h-28 rounded-full border-4 border-white shadow-lg object-cover"
+          />
+          <h2 className="mt-4 text-2xl font-bold text-blue-700">{studentInfo.name}</h2>
+          <span className="text-gray-500 text-sm mb-1">ID: {studentInfo.id}</span>
+          <span className="text-gray-600">{studentInfo.email}</span>
+          <div className="mt-4">
+            <span className="inline-block bg-blue-100 text-blue-700 px-4 py-1 rounded-full font-semibold shadow">
+              CNIC: {studentInfo.nic}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-    // ))
   )
- }
+}
     </>
   )
 }
