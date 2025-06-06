@@ -35,19 +35,23 @@ cloudinary.config({
 })
 
 
+const path = require("path");
+const dataFilePath = path.join(__dirname, "..", "data.json");
 
 const readDataFromFile = async () => {
     try {
-        const data = await fs.readFile("data.json", "utf-8");
+        const data = await fs.readFile(dataFilePath, "utf-8");
         return JSON.parse(data);
     } catch (error) {
+        console.log("Error reading file:", error);
+        
         return [];
     }
 };
 
 const writeDataToFile = async (data) => {
     try {
-       await fs.writeFile("data.json", JSON.stringify(data, null, 2));
+       await fs.writeFile(dataFilePath, JSON.stringify(data, null, 2));
     } catch (error) {
         console.log("Something went wrong while writing data");
         
