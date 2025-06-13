@@ -7,7 +7,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-const serverless = require("serverless-http");
+// const serverless = require("serverless-http");
 
 app.use(cors());
 app.use(express.json());
@@ -76,11 +76,11 @@ const uploadImageInCloudinary = (buffer, fileName) => {
     })
 };
 
-app.get('/api/idcard/:nic', async (req,res) => {
-    const nic = req.params.nic
+app.get('/api/idcard/:cnic', async (req,res) => {
+    const cnic = req.params.cnic
     const all = await readDataFromFile()
     
-    const student = all.find((s) => s.nic === nic)
+    const student = all.find((s) => s.cnic === cnic)
     // console.log(student);
     
 
@@ -93,22 +93,62 @@ app.get('/api/idcard/:nic', async (req,res) => {
 })
 
 app.post("/api/user/create", upload.single("image"), async (req, res) => {
-    const {name, email, nic} = req.body;
-    console.log(nic);
+    const {
+        fullName,
+        fatherName,
+        cnic,
+        country,
+        city,
+        course,
+        phone,
+        email,
+        gender,
+        address,
+        qualification,
+        laptop,
+        computerProficiency,
+        dob
+    } = req.body;
     
 
-    if (!name || !email || !req.file || !nic ) {
-        return res.send({message: "Name, Email, nic and Image are required", success: false});
-
+    if (
+        !fullName ||
+        !fatherName ||
+        !cnic ||
+        !country ||
+        !city ||
+        !course ||
+        !phone ||
+        !email ||
+        !gender ||
+        !address ||
+        !qualification ||
+        !laptop ||
+        !computerProficiency ||
+        !dob ||
+        !req.file
+    ) {
+        return res.send({ message: "All fields are required", success: false });
     }
     
 
     const uploadImage = await uploadImageInCloudinary(req.file.buffer, req.file.originalname);
 
     const newUser = {
-        name: name,
-        email: email,
-        nic: nic,
+        fullName,
+        fatherName,
+        cnic,
+        country,
+        city,
+        course,
+        phone,
+        email,
+        gender,
+        address,
+        qualification,
+        laptop,
+        computerProficiency,
+        dob,
         image: uploadImage.secure_url,
         id: uploadImage.public_id
     };
@@ -130,9 +170,9 @@ app.get('/api/all-users', async (req, res) => {
 
 
 module.exports = app;
-module.exports.handler = serverless(app);
+// module.exports.handler = serverless(app);
 
-// app.listen(process.env.PORT, () => {
-//     console.log(`srver is running on port ${process.env.PORT}`);
+app.listen(process.env.PORT, () => {
+    console.log(`srver is running on port ${process.env.PORT}`);
 
-// })
+})
