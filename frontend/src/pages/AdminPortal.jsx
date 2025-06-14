@@ -74,24 +74,24 @@ const AdminPortal = () => {
     setEditData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSave = async (id) => {
-    setSaving(true);
-    setError(null);
-    try {
-      await axios.put(`http://localhost:5000/api/user/${id}`, editData);
-      const updated = [...students];
-      updated[editIndex] = { ...editData };
-      setStudents(updated);
-      setEditIndex(null);
-      setSuccess('Student updated successfully!');
-      setTimeout(() => setSuccess(null), 3000);
-    } catch (err) {
-        console.log(err);
+  // const handleSave = async (id) => {
+  //   setSaving(true);
+  //   setError(null);
+  //   try {
+  //     await axios.put(`http://localhost:5000/api/user/${id}`, editData);
+  //     const updated = [...students];
+  //     updated[editIndex] = { ...editData };
+  //     setStudents(updated);
+  //     setEditIndex(null);
+  //     setSuccess('Student updated successfully!');
+  //     setTimeout(() => setSuccess(null), 3000);
+  //   } catch (err) {
+  //       console.log(err);
         
-      setError('Failed to save changes');
-    }
-    setSaving(false);
-  };
+  //     setError('Failed to save changes');
+  //   }
+  //   setSaving(false);
+  // };
 
   const handleCancel = () => {
     setEditIndex(null);
@@ -453,7 +453,7 @@ const AdminPortal = () => {
                           <td className="px-6 py-4 flex gap-2 justify-center">
                             <button
                               className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-4 py-2 rounded-lg shadow transition-all duration-200 flex items-center disabled:opacity-50"
-                              onClick={() => handleSave(s._id)}
+                              // onClick={() => handleSave(s._id)}
                               disabled={saving}
                             >
                               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
