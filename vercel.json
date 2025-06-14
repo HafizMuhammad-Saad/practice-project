@@ -19,5 +19,8 @@
       "src": "/(.*)",
       "dest": "/frontend/dist/$1"
     }
-  ]
+  ],
+  "staticBuild": {
+    "distDir": "frontend/dist"
+  }
 }
