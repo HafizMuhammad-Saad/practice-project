@@ -33,7 +33,7 @@ const backRef = useRef(null);
     setStudentInfo(null);
     
     try {
-      const res = await axios.get(`http://localhost:5000/api/idcard/${lookupNic}`);
+      const res = await axios.get(`/api/idcard/${lookupNic}`);
       setStudentInfo(res.data);
                       setShowConfetti(true);
 

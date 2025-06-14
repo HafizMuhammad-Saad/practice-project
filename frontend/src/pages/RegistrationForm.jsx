@@ -46,7 +46,7 @@ function RegistrationForm() {
   const [errorMessage, setErrorMessage] = useState('');
     const fetchUsers = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/all-users`);
+            const response = await axios.get(`/api/all-users`);
             setData(response.data.users);
             console.log(data);
 
@@ -86,7 +86,7 @@ function RegistrationForm() {
         }
       });
 
-      const response = await axios.post('http://localhost:5000/api/user/create', formDataToSend, {
+      const response = await axios.post('/api/user/create', formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 
@@ -491,7 +491,7 @@ function RegistrationForm() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 flex items-center ${
+                className={`px-8 py-4 cursor-pointer bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 flex items-center ${
                   isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
                 }`}
               >
