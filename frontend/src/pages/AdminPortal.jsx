@@ -47,10 +47,12 @@ const AdminPortal = () => {
   const fetchAllUsers = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/all-users');
+      const res = await axios.get('/api/all-users');
       setStudents(res.data.users);
       setLoading(false);
     } catch (err) {
+        console.log(err);
+        
       setError('Error fetching students');
       setLoading(false);
     }
@@ -84,6 +86,8 @@ const AdminPortal = () => {
       setSuccess('Student updated successfully!');
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
+        console.log(err);
+        
       setError('Failed to save changes');
     }
     setSaving(false);
