@@ -77,11 +77,18 @@ const uploadImageInCloudinary = (buffer, fileName) => {
 };
 
 app.get('/api/idcard/:cnic', async (req,res) => {
-    const cnic = req.params.cnic
-    const all = await readDataFromFile()
+    // const cnic = req.params.cnic
+    // const all = await readDataFromFile()
     
-    const student = all.find((s) => s.cnic === cnic)
+    // const student = all.find((s) => s?.cnic === cnic)
     // console.log(student);
+
+    const client = await require("./lib/mongodb");
+  const db = client.db("practicedb");
+  const collection = db.collection("users");
+
+  const student = await collection.findOne({ cnic: req.params.cnic });
+
     
 
     if (!student) {
@@ -153,26 +160,39 @@ app.post("/api/user/create", upload.single("image"), async (req, res) => {
         id: uploadImage.public_id
     };
 
-    // console.log(newUser.nic);
+    console.log(newUser.cnic);
     
 
-    const existingData = await readDataFromFile();
-    existingData.push(newUser);
-    await writeDataToFile(existingData)
+    // const existingData = await readDataFromFile();
+    // existingData.push(newUser);
+    // await writeDataToFile(existingData)
+
+    const client = await require("./lib/mongodb"); // adjust path if needed
+const db = client.db("practicedb");
+const collection = db.collection("users");
+
+await collection.insertOne(newUser);
 
     return res.send({message: "User Created Successfully", success: true, user: newUser});
 
 })
 app.get('/api/all-users', async (req, res) => {
-    const allUsers = await readDataFromFile();
-    res.send({users: allUsers});
+    // const allUsers = await readDataFromFile();
+    // res.send({users: allUsers});
+
+     const client = await require("./lib/mongodb");
+  const db = client.db("practicedb");
+  const collection = db.collection("users");
+
+  const allUsers = await collection.find({}).toArray();
+  res.send({ users: allUsers });
 })
 
 
 module.exports = app;
 module.exports.handler = serverless(app);
 
-// app.listen(process.env.PORT, () => {
-//     console.log(`srver is running on port ${process.env.PORT}`);
+app.listen(process.env.PORT, () => {
+    console.log(`srver is running on port ${process.env.PORT}`);
 
-// })
+})

@@ -144,5 +144,23 @@
     "dob": "2003-07-25",
     "image": "https://res.cloudinary.com/dqoqk50g7/image/upload/v1749840893/users_upload/1749840892034_WhatsApp%20Image%202025-05-23%20at%2022.56.04_6bd0852f.jpg.jpg",
     "id": "users_upload/1749840892034_WhatsApp Image 2025-05-23 at 22.56.04_6bd0852f.jpg"
+  },
+  {
+    "fullName": "Dustin Michael",
+    "fatherName": "Brenna Chavez",
+    "cnic": "98765-1234567-9",
+    "country": "In debitis in delect",
+    "city": "Perferendis dolores ",
+    "course": "Mobile App Development",
+    "phone": "+1 (262) 751-9289",
+    "email": "zasutawad@mailinator.com",
+    "gender": "Male",
+    "address": "Sequi sunt voluptati",
+    "qualification": "Intermediate",
+    "laptop": "Yes",
+    "computerProficiency": "Advanced",
+    "dob": "1993-04-27",
+    "image": "https://res.cloudinary.com/dqoqk50g7/image/upload/v1749880266/users_upload/1749880264159_WhatsApp%20Image%202025-05-23%20at%2022.56.04_6bd0852f.jpg.jpg",
+    "id": "users_upload/1749880264159_WhatsApp Image 2025-05-23 at 22.56.04_6bd0852f.jpg"
   }
 ]
