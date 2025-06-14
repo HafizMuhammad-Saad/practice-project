@@ -10,6 +10,7 @@ function RegistrationForm() {
     register, 
     formState: { errors, isSubmitting, isSubmitSuccessful },
     handleSubmit,
+    watch,
     reset
   } = useForm();
 
@@ -460,29 +461,38 @@ function RegistrationForm() {
                 
                 {/* Profile Photo */}
                 <div className="form-group md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Profile Photo <span className="text-red-500">*</span>
-                  </label>
-                  <div className="flex flex-col sm:flex-row items-start gap-4">
-                    <div className="w-full">
-                      <input
-                        type="file"
-                        className={`w-full px-4 py-3 border ${errors.image ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-200 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-indigo-600 file:text-white file:cursor-pointer`}
-                        {...register("image", { required: "Profile photo is required" })}
-                      />
-                      {errors.image && (
-                        <p className="mt-1 text-sm text-red-500">{errors.image.message}</p>
-                      )}
-                    </div>
-                    <div className="avatar flex-shrink-0">
-                      <div className="w-16 h-16 bg-gray-200 border-2 border-dashed rounded-full items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+  <label className="block text-sm font-medium text-gray-700 mb-2">
+    Profile Photo <span className="text-red-500">*</span>
+  </label>
+  <div className="flex flex-col items-center">
+    <label htmlFor="profile-photo-upload" className="cursor-pointer">
+      <div className="w-32 h-32 bg-gray-100 border-2 border-dashed border-indigo-300 rounded-xl flex items-center justify-center hover:bg-indigo-50 transition mb-2">
+        {watch('image') && watch('image')[0] ? (
+          <img
+            src={URL.createObjectURL(watch('image')[0])}
+            alt="Preview"
+            className="object-cover w-full h-full rounded-xl"
+          />
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 018 0M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        )}
+      </div>
+    </label>
+    <input
+      id="profile-photo-upload"
+      type="file"
+      accept="image/*"
+      className="hidden"
+      {...register("image", { required: "Profile photo is required" })}
+    />
+    {errors.image && (
+      <p className="mt-1 text-sm text-red-500">{errors.image.message}</p>
+    )}
+    <span className="text-xs text-gray-400">Click the box to upload</span>
+  </div>
+</div>
               </div>
             </div>
             
