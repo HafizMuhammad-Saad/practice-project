@@ -1,14 +1,20 @@
-import { BrowserRouter as Router, Route, Routes, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, NavLink, useLocation } from 'react-router-dom';
 import RegistrationForm from './pages/RegistrationForm';
 import GenerateIdCard from './pages/GenerateIdCard';
+import AdminPortal from './pages/AdminPortal';
+
 import { FaUserGraduate, FaIdCard, FaUniversity } from 'react-icons/fa';
 
-function App() {
+
+function AppContent() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname === '/admin';
+
   return (
-    <Router>
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100">
-        {/* Modern Navigation Header */}
-        <header className="sticky top-0 z-50 bg-white shadow-lg">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100">
+      {/* Show header and footer only if not on admin route */}
+      {!isAdminRoute && (
+            <header className="sticky top-0 z-50 bg-white shadow-lg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-20">
               <div className="flex items-center">
@@ -62,17 +68,19 @@ function App() {
             </div>
           </div>
         </header>
+      )}
 
-        <main className="flex-grow py-10">
-          <div className=" mx-auto px-4 sm:px-6 lg:px-8">
-            <Routes>
-              <Route path="/" element={<RegistrationForm />} />
-              <Route path="/idcard" element={<GenerateIdCard />} />
-            </Routes>
-          </div>
-        </main>
+      <main className="flex-grow">
+        <div className="mx-auto px-1 sm:px-1 lg:px-1">
+          <Routes>
+            <Route path="/" element={<RegistrationForm />} />
+            <Route path="/idcard" element={<GenerateIdCard />} />
+            <Route path="/admin" element={<AdminPortal />} />
+          </Routes>
+        </div>
+      </main>
 
-        {/* Modern Footer */}
+      {!isAdminRoute && (
         <footer className="bg-gradient-to-r from-indigo-700 to-purple-800 text-white py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -114,7 +122,15 @@ function App() {
             </div>
           </div>
         </footer>
-      </div>
+      )}
+    </div>
+  );
+}
+function App() {
+  return (
+    <Router>
+           <AppContent />
+
     </Router>
   );
 }
